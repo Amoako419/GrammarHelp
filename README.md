@@ -24,6 +24,7 @@ GrammarHelp is an AI-powered writing assistant that helps users improve their wr
 - Node.js 16 or higher
 - PostgreSQL
 - Google Gemini AI API key
+- Docker (for deployment)
 
 ## Setup Instructions
 
@@ -62,6 +63,58 @@ GrammarHelp is an AI-powered writing assistant that helps users improve their wr
 2. Start the development server:
    ```bash
    npm start
+   ```
+
+## Deployment
+
+### Frontend Deployment (GitHub Pages)
+
+1. Install gh-pages:
+   ```bash
+   cd frontend
+   npm install --save-dev gh-pages
+   ```
+
+2. Deploy to GitHub Pages:
+   ```bash
+   npm run deploy
+   ```
+
+The frontend will be available at: https://amoako419.github.io/GrammarHelp
+
+### Backend Deployment (Docker)
+
+1. Build the Docker image:
+   ```bash
+   cd backend
+   docker build -t grammarhelp-backend .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -d -p 8001:8001 --env-file .env grammarhelp-backend
+   ```
+
+### Alternative Backend Deployment (Heroku)
+
+1. Install Heroku CLI and login:
+   ```bash
+   heroku login
+   ```
+
+2. Create a new Heroku app:
+   ```bash
+   heroku create grammarhelp-backend
+   ```
+
+3. Set environment variables:
+   ```bash
+   heroku config:set GEMINI_API_KEY=your_api_key_here
+   ```
+
+4. Deploy to Heroku:
+   ```bash
+   git subtree push --prefix backend heroku main
    ```
 
 ## Using the Application
@@ -128,7 +181,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8001
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GPL License - see the LICENSE file for details.
 
 ## Support
 
